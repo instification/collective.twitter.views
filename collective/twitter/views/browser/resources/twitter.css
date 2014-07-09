@@ -1,0 +1,60 @@
+.twitterContainer{
+    border: 1px solid #8EC1DA;
+    color: #FFFFFF;
+    border-radius: 15px;
+    font-family: "lucida grande",lucida,tahoma,helvetica,arial,sans-serif !important;
+    font-size: 12px !important;
+    padding-bottom: 5px !important;
+    padding-top: 5px !important;
+}
+
+.twitterContainer a,  .twitterContainer a:link{
+    color: #1985B5 !important;
+    border: 0;
+}
+
+.twitterContainer .tweet-user-name{
+    font-size: 12px;
+    line-height: 15px;
+}
+
+.twitterContainer .result-item {
+    color:#000000;
+    border-bottom: 1px dotted #DDDDDD;
+    padding-top: 5px;
+}
+
+.twitterContainer .result-item .tweet-image {
+    float: left;
+    margin: 5px;
+}
+
+.twitterContainer .result-item .tweet-text {
+    margin: 5px 0 5px 0;
+    overflow: hidden;
+}
+
+.twitterContainer .tweet-actions {
+    font-size: 9px;
+    font-style: normal;
+    color: #1985B5;
+    clear: both;
+    margin: 0 0 5px 5px;
+    text-align: center;
+}
+
+.twitterContainer .result-item .tweet-content p {
+    font-size: 11px;
+    line-height: 13px;
+    margin: 0 0 0px;
+}
+
+.twitterContainer .tweet-actions a{ 
+    padding: 0 5px;
+}
+
+dl.portlet.twitterContainer .tweet-actions a.fav,
+dl.portlet.twitterContainer .tweet-actions a.retweet,
+dl.portlet.twitterContainer .tweet-actions a.reply, { 
+    border-left: 1px dotted #1985B5;
+}

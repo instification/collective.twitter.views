@@ -1,1 +1,38 @@
-<p>This is the twitter viewlet</p>
+<div class="twitterContainer">
+	<div class="result-item" tal:repeat="result view/tweets">
+	    <div class="tweet-image">
+	        <img class="avatar"
+	            src="#"
+	            tal:attributes="src python:result.GetUser().GetProfileImageUrl()"/>
+	    </div>
+	    <div class="tweet-content">
+	        <div class="tweet-row">
+	            <span class="tweet-user-name">
+	                <a class="tweet-screen-name"
+	                href="#"
+	                tal:define="screen_name python:result.GetUser().GetScreenName()"
+	                tal:attributes="href string:http://twitter.com/#!/${screen_name}">
+	                    <span tal:content="screen_name"/>
+	                </a>
+	            </span>
+	        </div>
+	        <div class="tweet-row">
+	            <div class="tweet-text">
+	                <span tal:replace="structure python:view.getTweet(result)"/>
+	            </div>
+	        </div>
+	    </div>
+	    <div class="tweet-actions">
+	      <a tal:attributes="href python:view.getTweetUrl(result)" class="tweet-timestamp"
+	          tal:content="python:view.getDate(result)"
+	          i18n:translate=""
+	           i18n:domain="collective.twitter.portlets"></a>
+	      <a class="reply" tal:attributes="href python:view.getReplyTweetUrl(result)"     i18n:translate=""
+	           i18n:domain="collective.twitter.portlets">Reply </a>
+	      <a class="retweet" tal:attributes="href python:view.getReTweetUrl(result)" i18n:translate=""
+	       i18n:domain="collective.twitter.portlets">ReTweet </a>
+	      <a class="fav" tal:attributes="href python:view.getFavTweetUrl(result)" i18n:translate=""
+	       i18n:domain="collective.twitter.portlets">Favorite </a>
+	    </div>
+	</div>
+</div>

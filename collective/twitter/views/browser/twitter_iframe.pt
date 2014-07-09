@@ -1,0 +1,11 @@
+<html metal:use-macro="context/main_template/macros/master"
+	i18n:domain="buyspoke.views">
+	<body>
+		<metal:block fill-slot="main">
+			<p>Test</p>
+			<iframe  height="450" scrolling="no" tal:attributes="src string:${context/absolute_url}/twitter_page_view">
+				<p>Twitter loading...</p>
+			</iframe>
+		</metal:block>
+	</body>
+</html>

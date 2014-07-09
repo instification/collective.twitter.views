@@ -11,6 +11,14 @@
   		layer="collective.twitter.views.interfaces.ITwitterViewsLayer"
   />
   
+  <browser:page
+  		for="*"
+  		name="twitter_iframe_example"
+  		template="twitter_iframe.pt"
+  		permission="zope2.View"
+  		layer="collective.twitter.views.interfaces.ITwitterViewsLayer"
+  />
+  
   <browser:viewletManager
 		name="collective.twitter.views.TwitterViewletManager"
 		provides=".interfaces.ITwitterViewletManager"
@@ -27,5 +35,10 @@
         permission="zope2.View" 
         layer="collective.twitter.views.interfaces.ITwitterViewsLayer"
   />
+  
+  <browser:resourceDirectory 
+        name="collective.twitter.views.browser"
+        directory="resources"
+        /> 
 
 </configure>
