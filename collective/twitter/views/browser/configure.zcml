@@ -1,0 +1,31 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="collective.twitter.views">
+  
+  <browser:page
+  		for="*"
+  		name="twitter_page_view"
+  		template="twitter_view.pt"
+  		permission="zope2.View"
+  		layer="collective.twitter.views.interfaces.ITwitterViewsLayer"
+  />
+  
+  <browser:viewletManager
+		name="collective.twitter.views.TwitterViewletManager"
+		provides=".interfaces.ITwitterViewletManager"
+		class="plone.app.viewletmanager.manager.OrderedViewletManager"
+		layer="collective.twitter.views.interfaces.ITwitterViewsLayer"
+		permission="zope2.View"
+		 />
+  
+  <browser:viewlet
+        name="collective.twitter.views.TwitterViewlet"
+        for="*"
+        manager=".interfaces.ITwitterViewletManager"
+        class=".viewlets.TwitterViewlet"
+        permission="zope2.View" 
+        layer="collective.twitter.views.interfaces.ITwitterViewsLayer"
+  />
+
+</configure>
