@@ -2,6 +2,7 @@ from collective.prettydate.interfaces import IPrettyDate
 
 from config import PROJECTNAME
 
+from plone.memoize import ram
 from plone.registry.interfaces import IRegistry
 
 from zope.component import getUtility
@@ -9,24 +10,40 @@ from zope.interface import alsoProvides
 from zope.schema.interfaces import IContextSourceBinder
 from zope.schema.vocabulary import SimpleVocabulary
 
+from time import time
+
 import twitter
 
 import logging
 logger = logging.getLogger(PROJECTNAME)
 
+def cache_key_simple(func, var, account=None,screen_name=None,count=5):
+    #let's memoize for 10 minutes or if any value of the portlet is modified
+    timeout = time() // (60 * 10)
+    return (timeout)
+
 class BaseTwitter(object):
-    def getSearchResults(self,account=None,count=5):
+    
+    @ram.cache(cache_key_simple)
+    def getSearchResults(self,account=None,screen_name=None,count=5):
         registry = getUtility(IRegistry)
-        accounts = registry.get('collective.twitter.accounts', [])
+        accounts = registry.get('collective.twitter.accounts', {})
         
         if len(accounts.keys())==0:
             return []
         
+        account_name=''
         if account is None:
-            account = accounts.get(accounts.keys()[-1],{})
+            account_name = accounts.keys()[-1]
+            account = accounts.get(account_name,{})
         else:
-            account = accounts.get(account, {})
+            account_name = account
+            account = accounts.get(account_name, {})
         results = []
+        
+        if screen_name is None:
+            screen_name = account_name
+            
     
         if account:
     
@@ -36,7 +53,7 @@ class BaseTwitter(object):
                              access_token_secret=account.get('oauth_token_secret'),)
     
             try:
-                results = tw.GetUserTimeline(screen_name='instification', count=count)
+                results = tw.GetUserTimeline(screen_name=screen_name, count=count)
             except Exception, e:
                 logger.info("Something went wrong: %s." % e)
                 results = []
